@@ -1,0 +1,8 @@
+region_name = "West Europe"
+region_code = "eu-west"
+organization_name = "msg systems ag"
+department_name = "Automotive Technology"
+project_name = "CloudTrain"
+stage = "dev"
+network_name = "iacrefvnet"
+network_cidr = "10.2.0.0/16"
