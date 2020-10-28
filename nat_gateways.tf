@@ -25,6 +25,12 @@ resource azurerm_public_ip_prefix ngw {
   tags = merge(map("Name", "pippre-${var.region_code}-${var.network_name}-ngw"), local.module_common_tags)
 }
 
+resource azurerm_subnet_nat_gateway_association web {
+  count = length(azurerm_subnet.app)
+  nat_gateway_id = azurerm_nat_gateway.ngw.id
+  subnet_id = azurerm_subnet.web[count.index].id
+}
+
 resource azurerm_subnet_nat_gateway_association app {
   count = length(azurerm_subnet.app)
   nat_gateway_id = azurerm_nat_gateway.ngw.id

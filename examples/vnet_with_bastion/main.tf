@@ -14,6 +14,13 @@ locals {
   }
 }
 
+# Create a new resource group if no resource group was specified
+resource azurerm_resource_group owner {
+  name = "rg-${var.region_code}-${var.network_name}-network"
+  location = var.region_name
+  tags = merge(map("Name", "rg-${var.region_code}-${var.network_name}-network"), local.main_common_tags)
+}
+
 module reference_vnet {
   source = "../.."
   region_name = var.region_name
@@ -22,6 +29,8 @@ module reference_vnet {
   department_name = var.department_name
   project_name = var.project_name
   stage = var.stage
+  resource_group_name = azurerm_resource_group.owner.name
+  resource_group_location = azurerm_resource_group.owner.location
   network_name = var.network_name
   network_cidr = var.network_cidr
 }

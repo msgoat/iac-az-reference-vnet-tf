@@ -27,6 +27,11 @@ variable resource_group_name {
   default = ""
 }
 
+variable resource_group_location {
+  description = "The location of the resource group supposed to own all allocated resources"
+  default = ""
+}
+
 variable network_name {
   description = "name of the reference network to create"
 }
