@@ -6,6 +6,13 @@ locals {
   empty_string = ""
 }
 
+resource azurerm_subnet agw {
+  name = "${local.subnet_name_prefix}-agw"
+  resource_group_name = local.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes = local.public_application_gateway_subnet_cidrs
+}
+
 resource azurerm_subnet web {
   count = local.number_of_web_subnets
   name = "${local.subnet_name_prefix}-web${local.number_of_web_subnets > 1 ? count.index : local.empty_string}"
@@ -38,7 +45,7 @@ locals {
 }
 
 # attach default security group to all subnets
-resource azurerm_subnet_network_security_group_association "default" {
+resource azurerm_subnet_network_security_group_association default {
   count = var.network_security_groups_enabled ? length(local.subnet_ids) : 0
   subnet_id = local.subnet_ids[count.index]
   network_security_group_id = azurerm_network_security_group.default[0].id

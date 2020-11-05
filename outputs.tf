@@ -19,6 +19,11 @@ output "private_subnet_ids" {
   value = concat(azurerm_subnet.app.*.id, azurerm_subnet.data.*.id)
 }
 
+output "application_gateway_subnet_id" {
+  description = "Unique identifier of the application gateway subnet"
+  value = azurerm_subnet.agw.id
+}
+
 output "web_subnet_ids" {
   description = "Unique identifiers of all web subnets"
   value = azurerm_subnet.web.*.id

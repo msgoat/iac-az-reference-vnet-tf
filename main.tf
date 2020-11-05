@@ -12,7 +12,8 @@ locals {
     Project = var.project_name
     Stage = var.stage
   }
-  subnet_cidrs = cidrsubnets(var.network_cidr, 4, 4, 8, 8)
+  subnet_cidrs = cidrsubnets(var.network_cidr, 4, 4, 8, 8, 8)
+  public_application_gateway_subnet_cidrs = slice(local.subnet_cidrs, 4,5)
   public_bastion_subnet_cidrs = slice(local.subnet_cidrs, 3,4)
   public_web_subnet_cidrs = slice(local.subnet_cidrs, 2, 3)
   private_app_subnet_cidrs = slice(local.subnet_cidrs, 1, 2)
