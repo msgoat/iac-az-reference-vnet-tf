@@ -39,3 +39,15 @@ variable network_name {
 variable network_cidr {
   description = "CIDR block of the network"
 }
+
+variable network_security_groups_enabled {
+  description = "Controls if default network security groups should be created and attached to all subnets"
+  type = bool
+  default = true
+}
+
+variable bastions_enabled {
+  description = "Controls if the Bastion services should be instantiated"
+  type = bool
+  default = true
+}

@@ -39,7 +39,7 @@ locals {
 
 # attach default security group to all subnets
 resource azurerm_subnet_network_security_group_association "default" {
-  count = length(local.subnet_ids)
+  count = var.network_security_groups_enabled ? length(local.subnet_ids) : 0
   subnet_id = local.subnet_ids[count.index]
-  network_security_group_id = azurerm_network_security_group.default.id
+  network_security_group_id = azurerm_network_security_group.default[0].id
 }
