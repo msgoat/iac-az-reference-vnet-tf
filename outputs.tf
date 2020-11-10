@@ -41,10 +41,10 @@ output "data_subnet_ids" {
 
 output "resource_group_name" {
   description = "Name of the resource group hosting all network components"
-  value = local.resource_group_name
+  value = var.resource_group_name
 }
 
 output "resource_group_location" {
   description = "Location of the resource group hosting all network components"
-  value = local.resource_group_location
+  value = var.resource_group_location
 }

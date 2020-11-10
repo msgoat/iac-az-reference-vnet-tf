@@ -6,8 +6,8 @@ locals {
 # Create a virtual network within the resource group
 resource "azurerm_virtual_network" "vnet" {
   name = local.vnet_name
-  resource_group_name = local.resource_group_name
-  location = local.resource_group_location
+  resource_group_name = var.resource_group_name
+  location = var.resource_group_location
   address_space = [
     var.network_cidr]
   tags = merge(map("Name", local.vnet_name), local.module_common_tags)
