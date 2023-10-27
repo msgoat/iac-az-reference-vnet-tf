@@ -26,7 +26,7 @@ resource azurerm_public_ip_prefix ngw {
 }
 
 resource azurerm_subnet_nat_gateway_association web {
-  count = length(azurerm_subnet.app)
+  count = length(azurerm_subnet.web)
   nat_gateway_id = azurerm_nat_gateway.ngw.id
   subnet_id = azurerm_subnet.web[count.index].id
 }
